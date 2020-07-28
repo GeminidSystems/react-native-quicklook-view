@@ -1,0 +1,12 @@
+React Proof of Concepts
+
+1.0.0 Release Notes
+
+An app in React Native demonstrating some WIP react modules related to iOS.
+
+Quick Look
+-----------
+- Added Preview for Quick Look
+- Added Thumbnail for Quick Look
+- Added Tap and Long Press handlers for Thumbnails
+- WIP Download and Encoded String file formats

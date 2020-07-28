@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>compileBitcode</key>
+	<true/>
+	<key>destination</key>
+	<string>export</string>
+	<key>manifest</key>
+	<dict>
+		<key>appURL</key>
+		<string>https://gs-poc.s3-us-west-2.amazonaws.com/com.geminidsystems.reactpoc/1.0.0</string>
+		<key>displayImageURL</key>
+		<string>https://gs-poc.s3-us-west-2.amazonaws.com/icon.png</string>
+		<key>fullSizeImageURL</key>
+		<string>https://gs-poc.s3-us-west-2.amazonaws.com/icon.png</string>
+	</dict>
+	<key>method</key>
+	<string>development</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.geminidsystems.reactpoc</key>
+		<string>React Native POC Development</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Development</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>4X99AZYP33</string>
+	<key>thinning</key>
+	<string>&lt;none&gt;</string>
+</dict>
+</plist>
