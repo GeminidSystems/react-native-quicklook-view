@@ -17,6 +17,10 @@
 		0A37FFAD24CF3B530053DA72 /* powerpoint.ppsx in Resources */ = {isa = PBXBuildFile; fileRef = 0A37FFA424CF3B530053DA72 /* powerpoint.ppsx */; };
 		0A37FFAE24CF3B530053DA72 /* QuickLookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A37FFA524CF3B530053DA72 /* QuickLookView.swift */; };
 		0A37FFAF24CF3B530053DA72 /* example.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A37FFA624CF3B530053DA72 /* example.pdf */; };
+		0A37FFB724CFCAEC0053DA72 /* QuickLookThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A37FFB624CFCAEC0053DA72 /* QuickLookThumbnail.swift */; };
+		0A37FFB924CFCCDF0053DA72 /* QuickLookThumbnailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A37FFB824CFCCDF0053DA72 /* QuickLookThumbnailManager.swift */; };
+		0A37FFBB24CFCD0F0053DA72 /* QuickLookThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A37FFBA24CFCD0F0053DA72 /* QuickLookThumbnailManager.m */; };
+		0A93562024CFDEE0000958EF /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A93561F24CFDEE0000958EF /* Util.swift */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -63,6 +67,10 @@
 		0A37FFA424CF3B530053DA72 /* powerpoint.ppsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = powerpoint.ppsx; sourceTree = "<group>"; };
 		0A37FFA524CF3B530053DA72 /* QuickLookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickLookView.swift; sourceTree = "<group>"; };
 		0A37FFA624CF3B530053DA72 /* example.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = example.pdf; sourceTree = "<group>"; };
+		0A37FFB624CFCAEC0053DA72 /* QuickLookThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuickLookThumbnail.swift; path = ReactPOC/QuickLookThumbnail.swift; sourceTree = "<group>"; };
+		0A37FFB824CFCCDF0053DA72 /* QuickLookThumbnailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuickLookThumbnailManager.swift; path = ReactPOC/QuickLookThumbnailManager.swift; sourceTree = "<group>"; };
+		0A37FFBA24CFCD0F0053DA72 /* QuickLookThumbnailManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QuickLookThumbnailManager.m; path = ReactPOC/QuickLookThumbnailManager.m; sourceTree = "<group>"; };
+		0A93561F24CFDEE0000958EF /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Util.swift; path = ReactPOC/Util.swift; sourceTree = "<group>"; };
 		10A27F6242502C4E17079A7B /* Pods-ReactPOC-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactPOC-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactPOC-tvOSTests/Pods-ReactPOC-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ReactPOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactPOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ReactPOC/AppDelegate.h; sourceTree = "<group>"; };
@@ -147,13 +155,17 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				0A37FFA624CF3B530053DA72 /* example.pdf */,
 				0A37FFA124CF3B530053DA72 /* noURL.png */,
-				0A37FFA424CF3B530053DA72 /* powerpoint.ppsx */,
+				0A93561F24CFDEE0000958EF /* Util.swift */,
 				0A37FFA524CF3B530053DA72 /* QuickLookView.swift */,
-				0A37FF9F24CF3B520053DA72 /* QuickLookViewManager.m */,
 				0A37FF9D24CF3B520053DA72 /* QuickLookViewManager.swift */,
+				0A37FF9F24CF3B520053DA72 /* QuickLookViewManager.m */,
+				0A37FFB624CFCAEC0053DA72 /* QuickLookThumbnail.swift */,
+				0A37FFB824CFCCDF0053DA72 /* QuickLookThumbnailManager.swift */,
+				0A37FFBA24CFCD0F0053DA72 /* QuickLookThumbnailManager.m */,
+				0A37FFA624CF3B530053DA72 /* example.pdf */,
 				0A37FFA324CF3B530053DA72 /* test_files.json */,
+				0A37FFA424CF3B530053DA72 /* powerpoint.ppsx */,
 				0A37FFA224CF3B530053DA72 /* test.jpeg */,
 				0A37FFA024CF3B530053DA72 /* zoo.mp4 */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -603,10 +615,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				0A93562024CFDEE0000958EF /* Util.swift in Sources */,
+				0A37FFB724CFCAEC0053DA72 /* QuickLookThumbnail.swift in Sources */,
 				0A37FFAE24CF3B530053DA72 /* QuickLookView.swift in Sources */,
+				0A37FFB924CFCCDF0053DA72 /* QuickLookThumbnailManager.swift in Sources */,
 				0A37FFA824CF3B530053DA72 /* QuickLookViewManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				0A37FFA724CF3B530053DA72 /* QuickLookViewManager.swift in Sources */,
+				0A37FFBB24CFCD0F0053DA72 /* QuickLookThumbnailManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
