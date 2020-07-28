@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FileType: Int {
+public enum FileType: Int {
     case Local
     case Download
     case Main
@@ -15,7 +15,7 @@ enum FileType: Int {
 }
 
 
-class Util {
+public class Util {
   static func getFile(fileURL: NSString, fileType: NSNumber, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
     let type: FileType = FileType(rawValue: Int(truncating: fileType))!
     switch (type) {
@@ -32,7 +32,7 @@ class Util {
         completion(success, fileLocation)
       }
     case .String:
-      <#code#>
+      print("encoded string")
     }
   }
   
