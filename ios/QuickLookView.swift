@@ -10,9 +10,7 @@ import QuickLook
 
 
 class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewControllerDelegate {
-  
-  @objc var onUpdate: RCTDirectEventBlock?
-  
+
   private var previewView: UIView?
   private var controller: QLPreviewController?
   @objc var urlString: NSString = ""
@@ -29,23 +27,10 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
     previewView = controller!.view
     previewView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     addSubview(previewView!)
-    
-    self.addGestureRecognizer(UILongPressGestureRecognizer(
-      target: self,
-      action: #selector(sendUpdate(_:))));
   }
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-  }
-  
-  @objc
-  func sendUpdate(_ gesture: UILongPressGestureRecognizer) {
-    if gesture.state == .began {
-      if onUpdate != nil {
-        onUpdate!(["view": self])
-      }
-    }
   }
 
   func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
@@ -54,13 +39,7 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
   
   func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
     print("Generated preview in view")
-    /*
-    print("\(width) \(height)")
-    print("urlString: \(urlString)")
-    print("Main Bundle: \(Bundle.main.url(forResource: urlString as String, withExtension: nil))")
-    print("Straight URL: \(URL(fileURLWithPath: urlString as String))")
-    print("Test picture: \(Bundle.main.url(forResource: "test", withExtension: "jpeg")!)")
- */
+
     let url = Bundle.main.url(forResource: urlString as String, withExtension: nil)
     if (url == nil) {
       print("No URL found for \(urlString)")
