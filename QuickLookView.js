@@ -51,7 +51,7 @@ export default class QuickLookView extends Component {
 					height = {height}
 					test = {"test"}
 					urlString = {url}
-					fileType = {fileType}
+					//fileType = {fileType}
 
 					onTap = {event => {if (onTap) {onTap(event)}}}
 					onLongPress = {event => {if (onLongPress) {onLongPress(event)}}}
@@ -66,7 +66,7 @@ export default class QuickLookView extends Component {
 					width = {width}
 					height = {height}
 					urlString = {url}
-					fileType = {fileType}
+					//fileType = {fileType}
 					ref = {ref => this.ref = ref}
 				/>
 			);
