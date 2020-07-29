@@ -96,7 +96,13 @@ export default class QuickLookView extends Component {
 					componentDidMount = {this.handleChange}
 					width = {width}
 					height = {height}
+
+					fileSource = {fileSource}
 					url = {url}
+					fileData = {fileData}
+					fileType = {fileType}
+					fileID = {fileID}
+					
 					ref = {ref => this.ref = ref}
 				/>
 			);
