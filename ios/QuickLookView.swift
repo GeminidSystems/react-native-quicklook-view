@@ -13,7 +13,11 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
 
   private var previewView: UIView?
   private var controller: QLPreviewController?
+  @objc var fileSource: NSNumber = -1
   @objc var urlString: NSString = ""
+  @objc var fileData: NSString = ""
+  @objc var fileType: NSString = ""
+  @objc var fileID: NSNumber = -1
 
   
   override init(frame: CGRect) {
@@ -39,6 +43,12 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
   
   func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
     print("Generated preview in view")
+    /*
+    Util.getFile(fileSource: FileSource(rawValue: Int(truncating: fileSource))!,
+                    urlString: urlString,
+                    fileData: fileData, fileType: fileType,
+                    fileID: fileID) { (success: Bool, fileLocation: URL?) in
+  */
 
     let url = Bundle.main.url(forResource: urlString as String, withExtension: nil)
     if (url == nil) {
