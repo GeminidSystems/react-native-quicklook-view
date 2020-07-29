@@ -7,40 +7,15 @@ import {
 
 import { styles, buttons } from './styles'  
 
-import QuickLookView, {FileType} from './QuickLookView'
+import {data} from './Data'
 
-const data = [
-    {
-        id: '0',
+import QuickLookView, {FileType, FileSource} from './QuickLookView'
+
+/*
+        fileSource: FileSource.MAIN,
         url: 'test.jpeg',
-        //fileType: FileType.MAIN,
-        title: 'Test Picture'
-    },
-    {
-        id: '1',
-        url: 'example.pdf',
-        //fileType: FileType.MAIN,
-        title: 'Test PDF'
-    },
-    {
-        id: '2',
-        url: 'zoo.mp4',
-        //fileType: FileType.MAIN,
-        title: 'Zoo Video'
-    },
-    {
-        id: '3',
-        url: 'powerpoint.ppsx',
-        //fileType: FileType.MAIN,
-        title: 'Science Powerpoint'
-    },
-    {
-        id: '4',
-        url: 'broken link',
-        //fileType: FileType.MAIN,
-        title: 'Broken Link'
-    }
-]
+        fileData:
+        fileType:*/
 
 const Item = ({item}) => (
     <View style = {styles.item}>
@@ -48,9 +23,12 @@ const Item = ({item}) => (
       <QuickLookView
             style = {styles.quicklook}
             height = {300}
+            fileSource = {item.fileSource}
             url = {item.url}
-            //fileType = {item.fileType}
-            thumbnail = {true}
+            fileData = {item.fileData}
+            fileType = {item.fileType}
+            fileID = {parseInt(item.id, 10)}
+            thumbnail = {item.thumbnail}
             onTap = {() => console.log("Tapped")}
             onLongPress = {() => console.log("Long Pressed")}
       />

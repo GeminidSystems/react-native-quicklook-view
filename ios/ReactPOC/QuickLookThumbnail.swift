@@ -12,16 +12,20 @@ class QuickLookThumbnail : UIView {
   
   @objc var onTap: RCTDirectEventBlock?
   @objc var onLongPress: RCTDirectEventBlock?
-  @objc var urlString = "" {
-    didSet {
-      print("urlString")
-      generateThumbnailRepresentations(fileURL: urlString, type: .Download)
-    }
+  @objc var fileSource: NSNumber = -1 {
+     didSet {handleUpdate()}
   }
-  @objc var test = "" {
-    didSet {
-      print("test")
-    }
+  @objc var urlString: NSString = "" {
+    didSet {handleUpdate()}
+  }
+  @objc var fileData: NSString = "" {
+     didSet {handleUpdate()}
+  }
+  @objc var fileType: NSString = "" {
+    didSet {handleUpdate()}
+  }
+  @objc var fileID: NSNumber = -1 {
+    didSet {handleUpdate()}
   }
   
   override init(frame: CGRect) {
@@ -60,15 +64,55 @@ class QuickLookThumbnail : UIView {
     }
   }
   
-  func generateThumbnailRepresentations(fileURL: String, type: FileType) {
-    let testURL = "https://image.shutterstock.com/image-photo/red-apple-isolated-on-white-260nw-1498042211.jpg"
-
-    Util.getFile(fileURL: testURL as NSString, fileType: NSNumber(value: FileType.Download.rawValue)) { (success: Bool, fileLocation: URL?) in
+  func handleUpdate() {
+    print("handled Update")
+    print(fileSource)
+    print(urlString)
+    print(fileData)
+    print(fileType)
+    print(fileID)
+    
+    if (fileSource == -1) {
+      return
+    }
+    
+    // TODO: Add try catch with this enum
+    let source: FileSource = FileSource.init(rawValue: Int(truncating: fileSource))!
+    switch (source) {
+    case .Local:
+      if (!(urlString as String).isEmpty && fileID != -1) {
+        generateThumbnailRepresentations(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
+      }
+      break
+    case .Downloadable:
+      if (!(urlString as String).isEmpty && fileID != -1) {
+        generateThumbnailRepresentations(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
+      }
+      break
+    case .Main:
+      if (!(urlString as String).isEmpty) {
+        generateThumbnailRepresentations(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
+      }
+      break
+    case .Base64:
+      if (!(fileData as String).isEmpty && !(fileType as String).isEmpty && fileID != -1) {
+        generateThumbnailRepresentations(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
+      }
+      break
+    }
+  }
+  
+  func generateThumbnailRepresentations(fileSource: FileSource, urlString: NSString?, fileData: NSString?, fileType: NSString?, fileID: NSNumber?) {
+    Util.getFile(fileSource: fileSource,
+                 urlString: urlString,
+                 fileData: fileData, fileType: fileType,
+                 fileID: fileID) { (success: Bool, fileLocation: URL?) in
       
       if #available(iOS 13.0, *) {
         if (success) {
           let size: CGSize = CGSize(width: self.frame.width, height: self.frame.height)
           let scale = UIScreen.main.scale
+        
           
           let request = QLThumbnailGenerator.Request(fileAt: fileLocation!,
                                                      size: size,
