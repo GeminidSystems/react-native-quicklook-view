@@ -14,16 +14,16 @@ const styles = StyleSheet.create({
       justifyContent: "center",
     },
     text: { 
-      textAlign: 'center',
-      fontSize: 14,
-      marginVertical: 4
+      textAlign: 'left',
+      fontSize: 16,
+      paddingVertical: 10,
+      paddingHorizontal: 10
     },
     item: {
       justifyContent: "center",
       backgroundColor: '#FFFFFF',
-      padding: 5,
-      marginVertical: 8,
-      marginHorizontal: 16,
+      paddingVertical: 4,
+      paddingHorizontal: 4,
     },
     separator: {
       height: 1,  
@@ -46,7 +46,12 @@ const styles = StyleSheet.create({
     borderRadius:10,
     borderWidth: 1,
     borderColor: '#222222'
-   }
+   },
+   primaryText: { 
+    textAlign: 'center',
+    fontSize: 14,
+    paddingVertical: 4
+  },
  })
   
 export { styles, buttons } 

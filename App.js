@@ -21,7 +21,7 @@ function HomeScreen({navigation}) {
           style = {buttons.primary}
           onPress = {() => navigation.navigate('QuickLook')}
           underlayColor = '#fff'>
-          <Text style = {styles.text}>Go to QuickLook</Text>
+          <Text style = {buttons.primaryText}>Go to QuickLook</Text>
         </TouchableOpacity>
       </View>
     );
@@ -34,6 +34,7 @@ export default class App extends Component {
             <Stack.Navigator>
               <Stack.Screen name = "Home" component = {HomeScreen} />
               <Stack.Screen name = "QuickLook" component = {QuickLook.screen} />
+              <Stack.Screen name = "QuickLookPreview" component = {QuickLook.previewScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

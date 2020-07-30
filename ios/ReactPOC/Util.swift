@@ -30,6 +30,8 @@ public class Util {
       }
     case .Downloadable:
       downloadFile(fileURL: urlString! as String, id: fileID!) { (_ success: Bool,_ fileLocation: URL?) in
+        print("Finished downloading file")
+        print(fileLocation)
         completion(success, fileLocation)
       }
     case .Main:
@@ -47,7 +49,7 @@ public class Util {
 
     let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     // Destination URL is a combination of the id and the file type (.png, .pdf, etc.)
-    let destinationUrl = documentsDirectoryURL.appendingPathComponent(id.stringValue + fileURL.components(separatedBy: ".").last!)
+    let destinationUrl = documentsDirectoryURL.appendingPathComponent(id.stringValue + "." + fileURL.components(separatedBy: ".").last!)
     
     // to check if file exists
     if FileManager.default.fileExists(atPath: destinationUrl.path) {
@@ -65,7 +67,7 @@ public class Util {
     
     let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     // Destination URL is a combination of the id and the file type (.png, .pdf, etc.)
-    let destinationUrl = documentsDirectoryURL.appendingPathComponent(id.stringValue + fileURL.components(separatedBy: ".").last!)
+    let destinationUrl = documentsDirectoryURL.appendingPathComponent(id.stringValue + "." + fileURL.components(separatedBy: ".").last!)
     
     // If a file with the id already exists, delete and attempt to rerun function
     if FileManager.default.fileExists(atPath: destinationUrl.path) {
