@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import {requireNativeComponent} from 'react-native'
 
 const RNQuickLookView = requireNativeComponent("QuickLookView");
-const RNQuickLookThumbnail = requireNativeComponent("QuickLookThumbnail");
 
 export const FileSource = {
 	// Attempts to retrieve from documents directory of file manager
@@ -47,7 +46,6 @@ export default class QuickLookView extends Component {
 		fileID: PropTypes.number,
 
 
-		thumbnail: PropTypes.bool,
 		onTap: PropTypes.func,
 		onLongPress: PropTypes.func
 	};
@@ -63,48 +61,29 @@ export default class QuickLookView extends Component {
 	render() {
 		const {	style, width, height, 
 				fileSource, url, fileData, fileType, fileID,
-				thumbnail, onTap, onLongPress
+				onTap, onLongPress
 			} = this.props;
-		if (height == null)
-			height = Dimensions.get('window').height;
 
 		console.log(fileSource)
 
-		if (thumbnail)
-			return (
-				<RNQuickLookThumbnail
-					style = {style}
-					componentDidMount = {this.handleChange}
-					width = {width}
-					height = {height}
-					
-					fileSource = {fileSource}
-					url = {url}
-					fileData = {fileData}
-					fileType = {fileType}
-					fileID = {fileID}
+		return (
+			<RNQuickLookView
+				style = {style}
+				componentDidMount = {this.handleChange}
+				width = {width}
+				height = {height}
 
-					onTap = {event => {if (onTap) {onTap(event)}}}
-					onLongPress = {event => {if (onLongPress) {onLongPress(event)}}}
-					ref = {ref => this.ref = ref}
-				/>
-			);
-		else
-			return (
-				<RNQuickLookView
-					style = {style}
-					componentDidMount = {this.handleChange}
-					width = {width}
-					height = {height}
+				fileSource = {fileSource}
+				url = {url}
+				fileData = {fileData}
+				fileType = {fileType}
+				fileID = {fileID}
 
-					fileSource = {fileSource}
-					url = {url}
-					fileData = {fileData}
-					fileType = {fileType}
-					fileID = {fileID}
-					
-					ref = {ref => this.ref = ref}
-				/>
-			);
+				onTap = {onTap}
+				onLongPress = {onLongPress}
+				
+				ref = {ref => this.ref = ref}
+			/>
+		);
 	}
 }

@@ -11,6 +11,8 @@ import QuickLook
 
 class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewControllerDelegate {
 
+  @objc var onTap: RCTDirectEventBlock?
+  @objc var onLongPress: RCTDirectEventBlock?
   private var previewView: UIView?
   private var controller: QLPreviewController?
   private var previewURL: URL = Bundle.main.url(forResource: "noURL.png", withExtension: nil)!
@@ -42,23 +44,50 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
     previewView = controller!.view
     previewView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     addSubview(previewView!)
+    
+    self.addGestureRecognizer(UITapGestureRecognizer(
+      target: self,
+      action: #selector(sendTap(_:))));
+    
+    self.addGestureRecognizer(UILongPressGestureRecognizer(
+      target: self,
+      action: #selector(sendLongPress(_:))));
   }
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
+  
+  @objc
+   func sendTap(_ gesture: UITapGestureRecognizer) {
+     if gesture.state == .ended {
+       if onTap != nil {
+         onTap!(["view": self])
+       }
+     }
+   }
+   
+   @objc
+   func sendLongPress(_ gesture: UILongPressGestureRecognizer) {
+     if gesture.state == .began {
+       print("Long Pressed")
+       if onLongPress != nil {
+         onLongPress!(["view": self])
+       }
+     }
+   }
 
   func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
     return 1
   }
   
   func handleUpdate() {
-    print("handled Update")
-    print(fileSource)
-    print(urlString)
-    print(fileData)
-    print(fileType)
-    print(fileID)
+    //print("handled Update")
+    //print(fileSource)
+    //print(urlString)
+    //print(fileData)
+    //print(fileType)
+    //print(fileID)
     
     if (fileSource == -1) {
       return
@@ -98,11 +127,14 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
                   
       if (success) {
         self.previewURL = fileLocation!
+        self.controller!.refreshCurrentPreviewItem()
+        print(self.previewURL)
       }
     }
   }
   
   func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+    print("--------------- \(fileID)")
     return previewURL as QLPreviewItem
   }
 }
