@@ -59,7 +59,7 @@ buck-out/
 /ios/Pods/
 
 # ZoomSDK
-/ios/libs/
+/ios/lib/
 
 
 # Archive
