@@ -18,9 +18,6 @@
 		0A37FFAD24CF3B530053DA72 /* powerpoint.ppsx in Resources */ = {isa = PBXBuildFile; fileRef = 0A37FFA424CF3B530053DA72 /* powerpoint.ppsx */; };
 		0A37FFAE24CF3B530053DA72 /* QuickLookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A37FFA524CF3B530053DA72 /* QuickLookView.swift */; };
 		0A37FFAF24CF3B530053DA72 /* example.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A37FFA624CF3B530053DA72 /* example.pdf */; };
-		0A37FFB724CFCAEC0053DA72 /* QuickLookThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A37FFB624CFCAEC0053DA72 /* QuickLookThumbnail.swift */; };
-		0A37FFB924CFCCDF0053DA72 /* QuickLookThumbnailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A37FFB824CFCCDF0053DA72 /* QuickLookThumbnailManager.swift */; };
-		0A37FFBB24CFCD0F0053DA72 /* QuickLookThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A37FFBA24CFCD0F0053DA72 /* QuickLookThumbnailManager.m */; };
 		0A93562024CFDEE0000958EF /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A93561F24CFDEE0000958EF /* Util.swift */; };
 		0AA2343024D9C6BD0034F94B /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA2342F24D9C6BD0034F94B /* MobileRTC.framework */; };
 		0AA2343124D9C6BD0034F94B /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA2342F24D9C6BD0034F94B /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -89,9 +86,6 @@
 		0A37FFA424CF3B530053DA72 /* powerpoint.ppsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = powerpoint.ppsx; sourceTree = "<group>"; };
 		0A37FFA524CF3B530053DA72 /* QuickLookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickLookView.swift; sourceTree = "<group>"; };
 		0A37FFA624CF3B530053DA72 /* example.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = example.pdf; sourceTree = "<group>"; };
-		0A37FFB624CFCAEC0053DA72 /* QuickLookThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuickLookThumbnail.swift; path = ReactPOC/QuickLookThumbnail.swift; sourceTree = "<group>"; };
-		0A37FFB824CFCCDF0053DA72 /* QuickLookThumbnailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuickLookThumbnailManager.swift; path = ReactPOC/QuickLookThumbnailManager.swift; sourceTree = "<group>"; };
-		0A37FFBA24CFCD0F0053DA72 /* QuickLookThumbnailManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QuickLookThumbnailManager.m; path = ReactPOC/QuickLookThumbnailManager.m; sourceTree = "<group>"; };
 		0A93561F24CFDEE0000958EF /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Util.swift; path = ReactPOC/Util.swift; sourceTree = "<group>"; };
 		0AA2342F24D9C6BD0034F94B /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileRTC.framework; path = lib/MobileRTC.framework; sourceTree = "<group>"; };
 		0AA2343324D9C6DD0034F94B /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = lib/MobileRTCResources.bundle; sourceTree = "<group>"; };
@@ -189,9 +183,6 @@
 				0A37FFA524CF3B530053DA72 /* QuickLookView.swift */,
 				0A37FF9D24CF3B520053DA72 /* QuickLookViewManager.swift */,
 				0A37FF9F24CF3B520053DA72 /* QuickLookViewManager.m */,
-				0A37FFB624CFCAEC0053DA72 /* QuickLookThumbnail.swift */,
-				0A37FFB824CFCCDF0053DA72 /* QuickLookThumbnailManager.swift */,
-				0A37FFBA24CFCD0F0053DA72 /* QuickLookThumbnailManager.m */,
 				0AA2343624D9D4EA0034F94B /* ZoomView.swift */,
 				0AA2343C24D9D5290034F94B /* ZoomViewManager.swift */,
 				0AA2343A24D9D5240034F94B /* ZoomViewManager.m */,
@@ -656,14 +647,11 @@
 				0AA2343B24D9D5240034F94B /* ZoomViewManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				0A93562024CFDEE0000958EF /* Util.swift in Sources */,
-				0A37FFB724CFCAEC0053DA72 /* QuickLookThumbnail.swift in Sources */,
 				0A37FFAE24CF3B530053DA72 /* QuickLookView.swift in Sources */,
-				0A37FFB924CFCCDF0053DA72 /* QuickLookThumbnailManager.swift in Sources */,
 				0AA2343724D9D4EB0034F94B /* ZoomView.swift in Sources */,
 				0A37FFA824CF3B530053DA72 /* QuickLookViewManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				0A37FFA724CF3B530053DA72 /* QuickLookViewManager.swift in Sources */,
-				0A37FFBB24CFCD0F0053DA72 /* QuickLookThumbnailManager.m in Sources */,
 				0AA2343D24D9D5290034F94B /* ZoomViewManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
