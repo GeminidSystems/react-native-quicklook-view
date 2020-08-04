@@ -10,6 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { styles, buttons } from './styles'  
 
 import {QuickLook} from './QuickLook'
+import {Zoom} from './Zoom'
 
 
 const Stack = createStackNavigator();
@@ -23,6 +24,12 @@ function HomeScreen({navigation}) {
           underlayColor = '#fff'>
           <Text style = {buttons.primaryText}>Go to QuickLook</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style = {buttons.primary}
+          onPress = {() => navigation.navigate('Zoom')}
+          underlayColor = '#fff'>
+          <Text style = {buttons.primaryText}>Go to Zoom</Text>
+        </TouchableOpacity>
       </View>
     );
 }
@@ -35,6 +42,7 @@ export default class App extends Component {
               <Stack.Screen name = "Home" component = {HomeScreen} />
               <Stack.Screen name = "QuickLook" component = {QuickLook.screen} />
               <Stack.Screen name = "QuickLookPreview" component = {QuickLook.previewScreen} />
+              <Stack.Screen name = "Zoom" component = {Zoom.screen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

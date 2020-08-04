@@ -12,6 +12,8 @@
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 
+#import <MobileRTC/MobileRTC.h>
+
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
   SKDescriptorMapper *layoutDescriptorMapper = [[SKDescriptorMapper alloc] initWithDefaults];
@@ -35,7 +37,27 @@ static void InitializeFlipper(UIApplication *application) {
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"ReactPOC"
                                             initialProperties:nil];
+  
+  // ZoomSDK
 
+  MobileRTCSDKInitContext *context = [[MobileRTCSDKInitContext alloc] init];
+  context.domain = kSDKDomain;
+  context.enableLog = YES;
+  context.locale = MobileRTC_ZoomLocale_Default;
+  BOOL initializeSuc = [[MobileRTC sharedRTC] initialize:context];
+  NSLog(@"initializeSuccessful======>%@",@(initializeSuc));
+  
+  
+  MobileRTCAuthService *authService = [[MobileRTC sharedRTC] getAuthService];
+  if (authService)
+  {
+    authService.delegate = self;
+    authService.clientKey = @"ROLEJt2ahn8HCxMREamw5XOxZuxqqH5FOHE7";
+    authService.clientSecret = @"ZRRVVLjPRol7quhvgPEf3B9vRzgHBXQyaa1W";
+    [authService sdkAuth];
+  }
+  
+  
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
