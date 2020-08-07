@@ -34,8 +34,6 @@ export default class QuickLookViewExample extends React.Component {
             fileData = {example_file.fileData}
             fileType = {example_file.fileType}
             fileID = {example_file.id}
-            onTap = {() => console.log("Tapped")}
-            onLongPress = {() => console.log("Long Pressed")}
           />
         </View>
     );

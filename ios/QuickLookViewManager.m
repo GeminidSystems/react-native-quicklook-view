@@ -16,4 +16,5 @@ RCT_EXPORT_VIEW_PROPERTY(fileID, NSNumber)
 
 RCT_EXPORT_VIEW_PROPERTY(onTap, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTDirectEventBlock)
+
 @end
