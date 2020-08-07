@@ -15,7 +15,7 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
   @objc var onLongPress: RCTDirectEventBlock?
   private var previewView: UIView?
   private var controller: QLPreviewController?
-  private var previewURL: URL = Bundle.main.url(forResource: "noURL.png", withExtension: nil)!
+    private var previewURL: URL? = nil //URL = Bundle.main.url(forResource: "noURL.png", withExtension: nil)!
   @objc var fileSource: NSNumber = -1 {
      didSet {handleUpdate()}
   }
@@ -70,8 +70,7 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
    @objc
    func sendLongPress(_ gesture: UILongPressGestureRecognizer) {
      if gesture.state == .began {
-       print("Long Pressed")
-       if onLongPress != nil {
+        if onLongPress != nil {
          onLongPress!(["view": self])
        }
      }
@@ -128,13 +127,11 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
       if (success) {
         self.previewURL = fileLocation!
         self.controller!.refreshCurrentPreviewItem()
-        print(self.previewURL)
       }
     }
   }
   
   func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-    print("--------------- \(fileID)")
-    return previewURL as QLPreviewItem
+    return previewURL as! QLPreviewItem
   }
 }
