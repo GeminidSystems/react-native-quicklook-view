@@ -28,12 +28,13 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
   @objc var fileType: NSString = "" {
     didSet {handleUpdate()}
   }
-  @objc var fileID: NSNumber = -1 {
+  @objc var fileID: NSString = "" {
     didSet {handleUpdate()}
   }
 
-  
+
   override init(frame: CGRect) {
+
     super.init(frame: frame)
     print("Initing QuickLookView from Swift")
 
@@ -44,20 +45,20 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
     previewView = controller!.view
     previewView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     addSubview(previewView!)
-    
+
     self.addGestureRecognizer(UITapGestureRecognizer(
       target: self,
       action: #selector(sendTap(_:))));
-    
+
     self.addGestureRecognizer(UILongPressGestureRecognizer(
       target: self,
       action: #selector(sendLongPress(_:))));
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
-  
+
   @objc
    func sendTap(_ gesture: UITapGestureRecognizer) {
      if gesture.state == .ended {
@@ -66,7 +67,7 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
        }
      }
    }
-   
+
    @objc
    func sendLongPress(_ gesture: UILongPressGestureRecognizer) {
      if gesture.state == .began {
@@ -79,7 +80,7 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
   func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
     return 1
   }
-  
+
   func handleUpdate() {
     //print("handled Update")
     //print(fileSource)
@@ -87,21 +88,21 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
     //print(fileData)
     //print(fileType)
     //print(fileID)
-    
+
     if (fileSource == -1) {
       return
     }
-    
+
     // TODO: Add try catch with this enum
     let source: FileSource = FileSource.init(rawValue: Int(truncating: fileSource))!
     switch (source) {
     case .Local:
-      if (!(urlString as String).isEmpty && fileID != -1) {
+      if (!(urlString as String).isEmpty && !(fileID as String).isEmpty) {
         generatePreviewView(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
       }
       break
     case .Downloadable:
-      if (!(urlString as String).isEmpty && fileID != -1) {
+      if (!(urlString as String).isEmpty && !(fileID as String).isEmpty) {
         generatePreviewView(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
       }
       break
@@ -111,27 +112,27 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
       }
       break
     case .Base64:
-      if (!(fileData as String).isEmpty && !(fileType as String).isEmpty && fileID != -1) {
+      if (!(fileData as String).isEmpty && !(fileType as String).isEmpty && !(fileID as String).isEmpty) {
         generatePreviewView(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
       }
       break
     }
   }
-  
-  func generatePreviewView(fileSource: FileSource, urlString: NSString?, fileData: NSString?, fileType: NSString?, fileID: NSNumber?) {
+
+  func generatePreviewView(fileSource: FileSource, urlString: NSString?, fileData: NSString?, fileType: NSString?, fileID: NSString?) {
     Util.getFile(fileSource: fileSource,
                  urlString: urlString,
                  fileData: fileData, fileType: fileType,
                  fileID: fileID) { (success: Bool, fileLocation: URL?) in
-                  
+
       if (success) {
         self.previewURL = fileLocation!
         self.controller!.refreshCurrentPreviewItem()
       }
     }
   }
-  
+
   func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-    return previewURL as! QLPreviewItem
+    return previewURL! as QLPreviewItem
   }
 }
