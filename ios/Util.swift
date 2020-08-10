@@ -14,22 +14,16 @@ public enum FileSource: Int {
     case Base64
 }
 
-public enum FileType: String {
-    case png
-    case jpeg
-    case pdf
-}
-
 public class Util {
-  static func getFile(fileSource: FileSource, urlString: NSString?, fileData: NSString?, fileType: NSString?, fileID: NSNumber?, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
-    
+  static func getFile(fileSource: FileSource, urlString: NSString?, fileData: NSString?, fileType: NSString?, fileID: NSString?, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
+
     switch (fileSource) {
     case .Local:
-      retrieveFile(fileURL: urlString! as String, id: fileID!) { (_ success: Bool,_ fileLocation: URL?) in
+      retrieveFile(fileURL: urlString! as String, id: fileID! as String) { (_ success: Bool,_ fileLocation: URL?) in
         completion(success, fileLocation)
       }
     case .Downloadable:
-      downloadFile(fileURL: urlString! as String, id: fileID!) { (_ success: Bool,_ fileLocation: URL?) in
+      downloadFile(fileURL: urlString! as String, id: fileID! as String) { (_ success: Bool,_ fileLocation: URL?) in
         print("Finished downloading file")
         print(fileLocation)
         completion(success, fileLocation)
@@ -39,19 +33,19 @@ public class Util {
         completion(success, fileLocation)
       }
     case .Base64:
-      parseBase64(fileData: fileData! as String, fileType: FileType.init(rawValue: fileType! as String)!, id: fileID!) {(_ success: Bool,_ fileLocation: URL?) in
+      parseBase64(fileData: fileData! as String, fileType: fileType! as String, id: fileID! as String) {(_ success: Bool,_ fileLocation: URL?) in
         completion(success, fileLocation)
       }
     }
-    
+
   }
-  
-  static func retrieveFile(fileURL: String, id: NSNumber, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
+
+  static func retrieveFile(fileURL: String, id: String, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
 
     let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     // Destination URL is a combination of the id and the file type (.png, .pdf, etc.)
-    let destinationUrl = documentsDirectoryURL.appendingPathComponent(id.stringValue + "." + fileURL.components(separatedBy: ".").last!)
-    
+    let destinationUrl = documentsDirectoryURL.appendingPathComponent(id + "." + fileURL.components(separatedBy: ".").last!)
+
     // to check if file exists
     if FileManager.default.fileExists(atPath: destinationUrl.path) {
       debugPrint("The file already exists at path")
@@ -61,15 +55,15 @@ public class Util {
       completion(false, nil)
     }
   }
-  
-  static func downloadFile(fileURL: String, id: NSNumber, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
+
+  static func downloadFile(fileURL: String, id: String, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
     print("downloading file")
     let itemUrl = URL(string: fileURL)
-    
+
     let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     // Destination URL is a combination of the id and the file type (.png, .pdf, etc.)
-    let destinationUrl = documentsDirectoryURL.appendingPathComponent(id.stringValue + "." + fileURL.components(separatedBy: ".").last!)
-    
+    let destinationUrl = documentsDirectoryURL.appendingPathComponent(id + "." + fileURL.components(separatedBy: ".").last!)
+
     // If a file with the id already exists, delete and attempt to rerun function
     if FileManager.default.fileExists(atPath: destinationUrl.path) {
       print("File exists already, deleting")
@@ -99,7 +93,7 @@ public class Util {
         }).resume()
     }
   }
-  
+
   static func getMainFile(fileURL: String, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
     let url = Bundle.main.url(forResource: fileURL as String, withExtension: nil)
     if (url != nil) {
@@ -109,11 +103,11 @@ public class Util {
       completion(false, nil)
     }
   }
-  
-  static func parseBase64(fileData: String, fileType: FileType, id: NSNumber, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
+
+  static func parseBase64(fileData: String, fileType: String, id: String, completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void) {
     let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    let destinationURL = documentsDirectoryURL.appendingPathComponent(id.stringValue + "." + fileType.rawValue)
-    
+    let destinationURL = documentsDirectoryURL.appendingPathComponent(id + "." + fileType)
+
     // If a file with the id already exists, delete and attempt to rerun function
     if FileManager.default.fileExists(atPath: destinationURL.path) {
       do {
@@ -129,7 +123,7 @@ public class Util {
     }
     else {
       let convertedData = Data(base64Encoded: fileData)
-      
+
       do {
         try convertedData!.write(to: destinationURL)
         completion(true, destinationURL)
