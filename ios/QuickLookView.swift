@@ -32,18 +32,20 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
     didSet {handleUpdate()}
   }
 
-
   override init(frame: CGRect) {
 
     super.init(frame: frame)
     print("Initing QuickLookView from Swift")
+    
 
     previewView = UIView()
     controller = QLPreviewController()
     controller!.delegate = self
     controller!.dataSource = self
     previewView = controller!.view
-    previewView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    previewView!.autoresizingMask = [.flexibleWidth, .flexibleHeight ]
+    controller!.view.backgroundColor = UIColor.black
+    controller!.automaticallyAdjustsScrollViewInsets = false
     addSubview(previewView!)
 
     self.addGestureRecognizer(UITapGestureRecognizer(
