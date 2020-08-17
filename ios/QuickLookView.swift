@@ -2,7 +2,7 @@
 //  QuickLook.swift
 //  POCApp
 //
-//  Created by Geoffrey Xue on 7/21/20.
+//  Created by Geoffrey Xue on 8/14/20.
 //
 
 import Foundation
@@ -12,29 +12,15 @@ import QuickLook
 class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewControllerDelegate {
 
   @objc var onTap: RCTDirectEventBlock?
-  @objc var onLongPress: RCTDirectEventBlock?
+  @objc var onPress: RCTDirectEventBlock?
+  @objc var onFinishedLoading: RCTDirectEventBlock?
   private var previewView: UIView?
   private var controller: QLPreviewController?
-    private var previewURL: URL? = nil //URL = Bundle.main.url(forResource: "noURL.png", withExtension: nil)!
-  @objc var fileSource: NSNumber = -1 {
-     didSet {handleUpdate()}
-  }
-  @objc var urlString: NSString = "" {
-    didSet {handleUpdate()}
-  }
-  @objc var fileData: NSString = "" {
-     didSet {handleUpdate()}
-  }
-  @objc var fileType: NSString = "" {
-    didSet {handleUpdate()}
-  }
-  @objc var fileID: NSString = "" {
-    didSet {handleUpdate()}
-  }
-
+  private var previewURL: URL = URL(fileURLWithPath: "")
+  
+  // file ID
 
   override init(frame: CGRect) {
-
     super.init(frame: frame)
     print("Initing QuickLookView from Swift")
 
@@ -45,20 +31,20 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
     previewView = controller!.view
     previewView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     addSubview(previewView!)
-
+    
     self.addGestureRecognizer(UITapGestureRecognizer(
       target: self,
       action: #selector(sendTap(_:))));
-
+    
     self.addGestureRecognizer(UILongPressGestureRecognizer(
       target: self,
-      action: #selector(sendLongPress(_:))));
+      action: #selector(sendPress(_:))));
   }
-
+  
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
-
+  
   @objc
    func sendTap(_ gesture: UITapGestureRecognizer) {
      if gesture.state == .ended {
@@ -67,12 +53,13 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
        }
      }
    }
-
+   
    @objc
-   func sendLongPress(_ gesture: UILongPressGestureRecognizer) {
+   func sendPress(_ gesture: UILongPressGestureRecognizer) {
      if gesture.state == .began {
-        if onLongPress != nil {
-         onLongPress!(["view": self])
+       print("Pressed")
+       if onPress != nil {
+         onPress!(["view": self])
        }
      }
    }
@@ -80,59 +67,44 @@ class QuickLookView : UIView, QLPreviewControllerDataSource, QLPreviewController
   func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
     return 1
   }
-
-  func handleUpdate() {
-    //print("handled Update")
-    //print(fileSource)
-    //print(urlString)
-    //print(fileData)
-    //print(fileType)
-    //print(fileID)
-
-    if (fileSource == -1) {
+  
+  func generatePreview(src: NSString, fileType: NSString?, fileID: NSString) {
+    // fileID and src are required to generate a preview of a file
+    if (fileID == "" || src == "") {
+      self.handleError()
       return
     }
-
-    // TODO: Add try catch with this enum
-    let source: FileSource = FileSource.init(rawValue: Int(truncating: fileSource))!
-    switch (source) {
-    case .Local:
-      if (!(urlString as String).isEmpty && !(fileID as String).isEmpty) {
-        generatePreviewView(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
+    
+    // If the file is base64, a fileType is required
+    if (!src.contains("https://") && !src.contains("file:///") && !src.contains("http://")) {
+      if (fileType == nil) {
+        self.handleError()
+        return
       }
-      break
-    case .Downloadable:
-      if (!(urlString as String).isEmpty && !(fileID as String).isEmpty) {
-        generatePreviewView(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
-      }
-      break
-    case .Main:
-      if (!(urlString as String).isEmpty) {
-        generatePreviewView(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
-      }
-      break
-    case .Base64:
-      if (!(fileData as String).isEmpty && !(fileType as String).isEmpty && !(fileID as String).isEmpty) {
-        generatePreviewView(fileSource: source, urlString: urlString, fileData: fileData, fileType: fileType, fileID: fileID)
-      }
-      break
     }
-  }
-
-  func generatePreviewView(fileSource: FileSource, urlString: NSString?, fileData: NSString?, fileType: NSString?, fileID: NSString?) {
-    Util.getFile(fileSource: fileSource,
-                 urlString: urlString,
-                 fileData: fileData, fileType: fileType,
-                 fileID: fileID) { (success: Bool, fileLocation: URL?) in
-
+    
+    Util.getFile(fileID: fileID, src: src, fileType: fileType) { (success: Bool, fileLocation: URL?) in
       if (success) {
         self.previewURL = fileLocation!
         self.controller!.refreshCurrentPreviewItem()
       }
-    }
+      else {
+        self.handleError()
+      }
+      if self.onFinishedLoading != nil {
+        self.onFinishedLoading!(["view": self])
+      }
+     }
   }
-
+  
+  func handleError() {
+    print("Error handler called")
+    //self.previewURL = Bundle.main.url(forResource: "noURL.png", withExtension: nil)!
+    self.previewURL = URL(fileURLWithPath: "error")
+    self.controller!.refreshCurrentPreviewItem()
+  }
+  
   func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-    return previewURL! as QLPreviewItem
+    return previewURL as QLPreviewItem
   }
 }
