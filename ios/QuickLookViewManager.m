@@ -5,16 +5,14 @@
 //  Created by Geoffrey Xue on 7/22/20.
 //
 
-#import "QuickLookView-Bridging-Header.h"
+#import "ReactPOC-Bridging-Header.h"
 
 @interface RCT_EXTERN_MODULE(QuickLookViewManager, RCTViewManager)
-RCT_EXPORT_VIEW_PROPERTY(fileSource, NSNumber)
-RCT_REMAP_VIEW_PROPERTY(url, urlString, NSString)
-RCT_EXPORT_VIEW_PROPERTY(fileData, NSString)
-RCT_EXPORT_VIEW_PROPERTY(fileType, NSString)
-RCT_EXPORT_VIEW_PROPERTY(fileID, NSString)
+RCT_EXTERN_METHOD(generatePreview: (NSString *)src
+                  fileType: (NSString *)fileType
+                  fileID: (NSString *)fileID)
 
+RCT_EXPORT_VIEW_PROPERTY(onFinishedLoading, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onTap, RCTDirectEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTDirectEventBlock)
-
+RCT_REMAP_VIEW_PROPERTY(onHeld, onPress, RCTDirectEventBlock)
 @end
