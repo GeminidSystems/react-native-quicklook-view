@@ -1,6 +1,6 @@
 {
   "name": "react-native-quicklook-view",
-  "version": "0.0.6",
+  "version": "1.0.3",
   "license": "ISC",
   "main": "lib/index.js",
   "author": "Karl Gunst <karl.gunst@geminidsystems.com> (https://github.com/GeminidSystems)",
