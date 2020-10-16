@@ -44,8 +44,12 @@ public class Util {
 
     let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     // Destination URL is a combination of the id and the file type (.png, .pdf, etc.)
-    let destinationUrl = documentsDirectoryURL.appendingPathComponent(id + "." + fileURL.components(separatedBy: ".").last!)
-
+    
+    let documentPath = documentsDirectoryURL.absoluteString.replacingOccurrences(of: "file://", with: "")
+    let formattedURL = fileURL.replacingOccurrences(of:documentPath, with:"", options: .literal, range: nil)
+    
+    let destinationUrl = documentsDirectoryURL.appendingPathComponent(formattedURL)
+    
     // to check if file exists
     if FileManager.default.fileExists(atPath: destinationUrl.path) {
       debugPrint("The file already exists at path")
