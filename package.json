@@ -1,6 +1,6 @@
 {
   "name": "react-native-quicklook-view",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "ISC",
   "main": "lib/index.js",
   "author": "Karl Gunst <karl.gunst@geminidsystems.com> (https://github.com/GeminidSystems)",
@@ -11,11 +11,6 @@
     "ios": "react-native run-ios",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "peerDependencies": {
-    "react": "*",
-    "react-native": "*",
-    "prop-types": "*"
   },
   "repository": {
     "type": "git",
@@ -36,8 +31,9 @@
   "bugs": {
     "url": "https://github.com/GeminidSystems/react-native-quicklook-view/issues"
   },
-  "dependencies": {
-    "react": "^16.13.1",
-    "react-native": "^0.63.2"
-  }
+  "peerDependencies": {
+      "react": "*",
+      "react-native": "*"
+  },
+  "dependencies": {}
 }
